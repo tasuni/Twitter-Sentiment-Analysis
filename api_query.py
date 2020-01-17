@@ -5,6 +5,7 @@ import csv
 import pandas as pd
 import re
 
+
 #auth declarations
 CONSUMER_KEY 		= "your-key-here"
 CONSUMER_SECRET_KEY = "your-skey-here"
@@ -27,8 +28,8 @@ def clean_tweet(tweet):
 	return newline_filter
 
 
-def get_tweets():
-	for tweet in tweepy.Cursor(api.search, q='#pinkfloyd -filter:retweets', count=2, tweet_mode='extended', lang='en').items():
+def get_tweets(hashtag):
+	for tweet in tweepy.Cursor(api.search, q=f'#{hashtag} -filter:retweets', count=2, tweet_mode='extended', lang='en').items():
 		tweets.append(tweet.full_text.encode('utf-8'))
 
 	cleaned_tweets = []
@@ -44,7 +45,7 @@ if __name__ == "__main__":
 	auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 	api = tweepy.API(auth)
 
-	tweet_list = get_tweets()
+	tweet_list = get_tweets("pinkfloyd")
 
 	df = pd.DataFrame(tweet_list)
 	df.to_csv(r"df.csv")
