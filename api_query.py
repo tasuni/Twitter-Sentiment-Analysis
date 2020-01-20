@@ -11,10 +11,10 @@ ACCESS_TOKEN_SECRET = "your-stoken-here"
 
 
 class TweepyHandler:
-	"""
-	Setup the auth keys and access tokens for the api instance
-	"""
 	def set_auth(self, consumer_key, consumer_secret_key, access_token, access_token_secret):
+		"""
+		Setup the auth keys and access tokens for the api instance
+		"""
 		auth = tweepy.OAuthHandler(consumer_key, consumer_secret_key)
 		auth.set_access_token(access_token, access_token_secret)
 		api = tweepy.API(auth)
